@@ -122,21 +122,20 @@ colorbar;
 
 % Heatmap of u
 figure;
-title("u")
 imagesc(x/1000, z, u);
 set(gca,'YDir','normal');
 xlim([23,27]);
 xlabel('x (km)');
 ylabel('z (m)');
+title("u")
 colorbar;
 
 % Heatmap of w
 figure;
-title("w")
 imagesc(x/1000, z, w);
 set(gca,'YDir','normal');
 xlim([23,27]);
 xlabel('x (km)');
 ylabel('z (m)');
-
+title("w")
 colorbar;
