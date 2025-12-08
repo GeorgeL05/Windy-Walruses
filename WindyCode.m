@@ -4,7 +4,7 @@ clear; clc;
 U0 = 20;
 Lx = 100000;
 H  = 800;
-Nx = 256;
+Nx = 4096;
 Nz = 101;
 
 x  = linspace(0, Lx, Nx);
@@ -108,18 +108,34 @@ u = real(u);              % physical field is real
 
 %% Plot u(x,z) and w(x,z)
 
+% Heatmap of fz
+figure;
+
+imagesc(x/1000, z, fz);
+set(gca,'YDir','normal');
+xlim([23,27]);
+xlabel('x (km)');
+ylabel('z (m)');
+title("fz");
+colorbar;
+
+
 % Heatmap of u
 figure;
+title("u")
 imagesc(x/1000, z, u);
 set(gca,'YDir','normal');
+xlim([23,27]);
 xlabel('x (km)');
 ylabel('z (m)');
 colorbar;
 
 % Heatmap of w
 figure;
+title("w")
 imagesc(x/1000, z, w);
 set(gca,'YDir','normal');
+xlim([23,27]);
 xlabel('x (km)');
 ylabel('z (m)');
 
