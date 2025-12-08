@@ -23,10 +23,9 @@ sigz = 40;
 fx = -A .* exp(-(X-x0).^2/(2*sigx^2)) .* ...
          exp(-(Z-z0).^2/(2*sigz^2));
 
-%% Analytic derivative in z
 fz = fx .* (-(Z - z0)/sigz^2);
 
-%% FFT in x (dimension 2)
+%% FFT in x
 fx_hat = fft(fx, [], 2);
 fz_hat = fft(fz, [], 2);
 
@@ -123,4 +122,5 @@ imagesc(x/1000, z, w);
 set(gca,'YDir','normal');
 xlabel('x (km)');
 ylabel('z (m)');
+
 colorbar;
