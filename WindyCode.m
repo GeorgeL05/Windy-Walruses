@@ -130,5 +130,3 @@ xlabel('x (km)');
 ylabel('z (m)');
 title("w")
 colorbar;
-
-disp(u(:,1))
