@@ -71,11 +71,11 @@ w = real(w);
 
 %% Recover u(x,z) from w_hat and plot
 
-%Compute d w_hat / dz for each Fourier mode
-Wz_hat = zeros(Nz, Nx);
+%Compute dw / dz for each Fourier mode
+Wz = zeros(Nz, Nx);
 
 for ik = 1:Nx
-    wmode = w_hat(:,ik);
+    wmode = w(:,ik);
     dwdz  = zeros(Nz,1);
 
     % interior points: central difference
@@ -87,30 +87,22 @@ for ik = 1:Nx
     % top: Neumann BC w_z(H)=0
     dwdz(Nz) = 0;
 
-    Wz_hat(:,ik) = dwdz;
+    Wz(:,ik) = dwdz;
 end
 
-%Use continuity in Fourier space: u_hat = - (1/(i k)) * d w_hat/dz
-u_hat = zeros(Nz, Nx);
+% Compute u(x,z)
 
-for ik = 1:Nx
-    k = kvec(ik);
-    if abs(k) < 1e-12
-        u_hat(:,ik) = 0;
-    else
-        u_hat(:,ik) = - Wz_hat(:,ik) / (1i * k);
-    end
+dx = x(2) - x(1);
+u  = zeros(Nz, Nx);
+
+for j = 1:Nz
+    u(j,:) = -cumtrapz(x, Wz(j,:));
 end
-
-%Inverse FFT in x to get u(x,z)
-u = ifft(u_hat, [], 2);   % Nz x Nx
-u = real(u);              % physical field is real
 
 %% Plot u(x,z) and w(x,z)
 
 % Heatmap of fz
 figure;
-
 imagesc(x/1000, z, fz);
 set(gca,'YDir','normal');
 xlim([23,27]);
@@ -139,3 +131,5 @@ xlabel('x (km)');
 ylabel('z (m)');
 title("w")
 colorbar;
+
+disp(u(:,1))
