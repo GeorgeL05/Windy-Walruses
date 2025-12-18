@@ -4,7 +4,7 @@ clear; clc;
 U0 = 20;
 Lx = 100000;
 H  = 800;
-Nx = 4096;
+Nx = 16384;
 Nz = 101;
 
 x  = linspace(0, Lx, Nx);
@@ -130,3 +130,4 @@ xlabel('x (km)');
 ylabel('z (m)');
 title("w")
 colorbar;
+
