@@ -32,7 +32,6 @@ fz_hat = fft(fz, [], 2);
 % Wavenumbers corresponding to FFT ordering
 kvec = (2*pi/Lx) * [0:(Nx/2-1), -Nx/2:-1];
 
-%% Preallocate Fourier coefficients of w
 w_hat = zeros(Nz, Nx);
 
 %% Loop over Fourier modes
@@ -65,11 +64,11 @@ for ik = 1:Nx
     w_hat(:,ik) = L \ rhs;
 end
 
-%% Inverse FFT in x to get w(x,z)
+% Inverse FFT in x to get w(x,z)
 w = ifft(w_hat, [], 2);
 w = real(w);
 
-%% Recover u(x,z) from w_hat and plot
+%% Calculate u(x,z)
 
 %Compute dw / dz for each Fourier mode
 Wz = zeros(Nz, Nx);
